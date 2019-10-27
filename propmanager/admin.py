@@ -5,7 +5,7 @@ from propmanager.models import *
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     model = Owner
-    list_display = ('first_name', 'last_name')
+    list_display = ('first_name', 'last_name', 'email', 'telephone')
 
 
 @admin.register(PropertyType)
