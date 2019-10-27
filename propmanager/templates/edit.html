@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Property Details</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="container-fluid">
+    <h3>Edit Property Details</h3>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>&nbsp;
+            <select class="form-control" placeholder="Owner" name="owner" required>
+            <option value="{{ property.owner.pk }}">{{ property.owner.first_name }} {{ property.owner.last_name }}</option>&nbsp;
+                {% for owner in owners %}
+                    <option value="{{ owner.pk }}">{{ owner.first_name }} {{ owner.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <select class="form-control"  name="type" required>
+            <option value="{{ property.property_type.pk }}">{{ property.property_type.name }}</option>&nbsp;
+                {% for type in property_types %}
+                    <option value="{{ type.pk }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>&nbsp;
+            <input class="form-control" placeholder="Value" type="number" min="0.01" name="value" step="0.01"
+                   max="10000000000000" required
+                   value="{{ property.value }}"  >
+        </div>&nbsp;
+
+
+        <div><input type="submit" name="edit" value="Edit Details"></div>&nbsp;
+        <div><input type="submit" name="delete" value="Delete Listing"></div>&nbsp;
+            <div><input type="submit" name="main" value="Main Menu"></div>&nbsp;
+        <div><input type="submit" name="list" value="Back To All Properties"></div>&nbsp;
+
+    </form>
+</div>
+</form>
+</body>
+</html>
+

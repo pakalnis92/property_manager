@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Properties List</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <h3>Add new property</h3>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="number" class="form-control" placeholder="Address Line 1" name="address1" required
+                   aria-describedby="basic-addon1">
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" placeholder="Address Line 2" name="address2" required
+                   aria-describedby="basic-addon1">
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" placeholder="City / Town" name="city_town" required
+                   aria-describedby="basic-addon1">
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" placeholder="County" name="county" required
+                   aria-describedby="basic-addon1">
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" placeholder="Post Code" name="post_code" required
+                   aria-describedby="basic-addon1">
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" placeholder="Location" name="location" required
+                   aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>&nbsp;
+            <select class="form-control" placeholder="Owner" name="owner" required>
+                <option value="">Owner</option>
+                {% for owner in owners %}
+                    <option value="{{ owner.pk }}">{{ owner.first_name }} {{ owner.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>&nbsp;
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <select class="form-control" placeholder="Owner" name="type" required>
+                <option value="">Property Type</option>
+                {% for type in property_types %}
+                    <option value="{{ type.pk }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>&nbsp;
+            <input class="form-control" placeholder="Value" type="number" min="0.01" name="value" step="0.01"
+                   max="10000000000000" required
+                   value="{{ property.value }}">
+        </div>&nbsp;
+        <div><input type="submit" name="create_property" value="Add Property"></div>&nbsp;
+        <div><input type="submit" name="main_menu" value="Main Menu" formnovalidate ></div>
+
+    </form>
+
+</div>
+</body>
+</html>
+

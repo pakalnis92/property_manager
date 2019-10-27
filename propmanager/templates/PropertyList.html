@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Properties List</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container-fluid">
+    <h3>Properties List</h3>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <table class="table table-bordered table-striped">
+            <tbody>
+            <tr>
+                <td>
+                    <span style="font-weight:bold">Value</span>
+
+                </td>
+                <td>
+                    <span style="font-weight:bold">Property Type</span>
+                </td>
+                <td>
+                    <span style="font-weight:bold">Location</span>
+                </td>
+                <td>
+                    <span style="font-weight:bold">Address</span>
+                </td>
+                <td>
+                    <span style="font-weight:bold">Owner</span>
+
+                </td>
+            </tr>
+
+
+            {% for x in properties %}
+                <tr>
+                    <td>
+                        <a href="/edit_property/{{ x.pk }}/">{{ x.value }} £</a>
+                    </td>
+                    <td>
+                        {{ x.property_type }}
+                    </td>
+                    <td>
+                        {{ x.location }}
+                    </td>
+                    <td>
+                        {{ x.address_line_1 }}
+                        {{ x.address_line_2 }}
+                        {{ x.city_town }}
+                        {{ x.county }}
+                        {{ x.post_code }}
+                    </td>
+                    <td>
+                        {{ x.owner.first_name }}
+                        {{ x.owner.last_name }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+        <div><input type="submit" name="go_edit" value="Add Property"></div>&nbsp;
+            <div><input type="submit" name="main_menu" value="Main Menu"></div>
+
+
+    </form>
+
+</div>
+</body>
+</html>
+
